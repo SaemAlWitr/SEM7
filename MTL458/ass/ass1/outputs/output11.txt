@@ -1,0 +1,12 @@
+MTL458 > mkdir dir1
+MTL458 > cd dir1
+MTL458 > pwd
+/autograder/source/dir1
+MTL458 > cd -
+/autograder/source
+MTL458 > cd dir2
+Invalid Command
+MTL458 > cd -
+/autograder/source/dir1
+MTL458 > rmdir dir1
+MTL458 > exit

@@ -1,0 +1,7 @@
+echo "hello world" > file4.txt
+echo "hola world" >> file4.txt
+echo "hola mundo" >> file4.txt
+cat file4.txt | grep -c hola
+cat file4.txt | grep -c hello
+rm file4.txt
+exit

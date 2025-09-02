@@ -1,0 +1,12 @@
+MTL458 > pwd ; ls
+/autograder/source
+a.outa1.cdirectory1file1.txtfile2.txtoutputsoutputs_altrequirements.txtrun_autograderrun_tests.pysetup.shtestcasestests
+MTL458 > invalid && ls
+Invalid Command
+MTL458 > invalid ; ls
+Invalid Command
+a.outa1.cdirectory1file1.txtfile2.txtoutputsoutputs_altrequirements.txtrun_autograderrun_tests.pysetup.shtestcasestests
+MTL458 > ls && echo OK
+a.outa1.cdirectory1file1.txtfile2.txtoutputsoutputs_altrequirements.txtrun_autograderrun_tests.pysetup.shtestcasestests
+OK
+MTL458 > exit

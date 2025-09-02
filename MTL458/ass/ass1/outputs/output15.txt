@@ -1,0 +1,9 @@
+MTL458 > cd directory1
+MTL458 > mkdir directory2
+MTL458 > ls -R
+.:
+directory2
+file3.txt
+
+./directory2:
+MTL458 > exit

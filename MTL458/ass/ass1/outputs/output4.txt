@@ -1,0 +1,4 @@
+MTL458 > echo one; echo two
+one
+two
+MTL458 > exit

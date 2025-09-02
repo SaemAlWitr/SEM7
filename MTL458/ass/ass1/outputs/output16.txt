@@ -1,0 +1,9 @@
+MTL458 > echo "hello world" > file4.txt
+MTL458 > echo "hola world" >> file4.txt
+MTL458 > echo "hola mundo" >> file4.txt
+MTL458 > cat file4.txt | grep -c hola
+2
+MTL458 > cat file4.txt | grep -c hello
+1
+MTL458 > rm file4.txt
+MTL458 > exit

@@ -1,0 +1,9 @@
+MTL458 > cat file1.txt
+hello world
+MTL458 > cat file2.txt
+foo bar
+MTL458 > echo hello > temp.txt
+MTL458 > cat temp.txt
+hello
+MTL458 > rm temp.txt
+MTL458 > exit

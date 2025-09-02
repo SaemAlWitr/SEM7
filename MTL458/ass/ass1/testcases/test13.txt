@@ -1,0 +1,6 @@
+cat file1\t
+cat file2\t
+echo hello > temp.txt
+cat temp\t
+rm temp\t
+exit

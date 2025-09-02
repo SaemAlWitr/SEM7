@@ -1,0 +1,4 @@
+echo sample > output.txt
+cat output.txt
+rm output.txt
+exit

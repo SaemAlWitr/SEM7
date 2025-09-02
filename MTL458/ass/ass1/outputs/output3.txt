@@ -1,0 +1,5 @@
+MTL458 > echo sample > output.txt
+MTL458 > cat output.txt
+sample
+MTL458 > rm output.txt
+MTL458 > exit

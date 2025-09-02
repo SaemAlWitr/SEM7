@@ -1,0 +1,13 @@
+MTL458 > pwd
+/autograder/source
+MTL458 > echo Hello
+Hello
+MTL458 > history
+pwd
+echo Hello
+history
+MTL458 > history 3
+echo Hello
+history
+history 3
+MTL458 > exit

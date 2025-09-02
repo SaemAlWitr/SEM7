@@ -1,0 +1,8 @@
+﻿MTL458 > echo hola   >   spaced.txt
+MTL458 > cat file* >> spaced.txt
+MTL458 > cat spaced.txt
+hola
+hello world
+foo bar
+MTL458 > rm spaced.txt
+MTL458 > exit
