@@ -16,10 +16,12 @@ parser.add_argument("-q5", action="store_false")
 
 args = parser.parse_args()
 
+np.random.seed(42)
+
 class sgdregressor():
     def __init__(self):
         self.theta = 0
-        self.lr = 0.01
+        self.lr = 0.001
         self.m, self.n = 0, 0
         self.r = 0
         self.eps = 1e-4
@@ -32,7 +34,7 @@ class sgdregressor():
     def gradiant(self, X, Y, theta,r):
         return X.T@((X@theta.T) - Y)/r
     
-    def fit(self, X, Y, lr = 0.01, r = 1000,  verbose = 0, epochs = 5000, cst_stopping_condn = 0, view_steps = 0, k = 5):
+    def fit(self, X, Y, lr = 0.001, r = 1000,  verbose = 0, epochs = 5000, cst_stopping_condn = 0, k = 5):
         self.m = X.shape[0]
         self.n = X.shape[1]+1
         self.lr = lr
@@ -48,10 +50,8 @@ class sgdregressor():
         last_k = cost
         iter = 1
         grad = 20
-        indices = np.arange(self.m)
         while (len(moving_sums) <= k or abs(moving_sums[-1]-moving_sums[-k-1]) > self.eps):
-            if view_steps and len(moving_sums) > k:
-                print(iter, cost, abs(moving_sums[-1]-moving_sums[-k-1]))
+            indices = np.arange(self.m)
             for i in range(0,self.m, r):
                 bidx = indices[i:i+r]
                 X_r = X[bidx,:]
@@ -67,14 +67,15 @@ class sgdregressor():
                 if(len(J_values) > k):
                     last_k-=J_values[-k-1]
                 moving_sums.append(last_k/k)
+            if verbose:
+                print(iter,cost)
             J_values.append(cost)
             
             history.append(self.theta.copy())
             iter += 1
         self.iter_ct = iter
         self.train_error = self.J(X, Y,self.theta,self.m)
-        if verbose:
-            print(f"r = {r}, error = {self.train_error}, num_iter = {self.iter_ct}, theta = {self.theta}, error in theta = {np.linalg.norm(self.theta-theta,2)}")
+        print(f"r = {r}, error = {self.train_error}, num_iter = {self.iter_ct}, theta = {self.theta}, error in theta = {np.linalg.norm(self.theta-theta,2)}")
         return history
 
 
@@ -105,65 +106,6 @@ X_train, X_test, Y_train, Y_test = (np.array(df_train[['x1','x2']]), np.array(df
 
 
 #q2 start
-class sgdregressor():
-    def __init__(self):
-        self.theta = 0
-        self.lr = 0.01
-        self.m, self.n = 0, 0
-        self.r = 0
-        self.eps = 1e-4
-        self.iter_ct = 0
-        self.train_error = np.inf
-
-    def J(self, X, Y,theta,r):
-        return (np.sum(np.square((Y-(X@theta.T)))))/2/r
-    
-    def gradiant(self, X, Y, theta,r):
-        return X.T@((X@theta.T) - Y)/r
-    
-    def fit(self, X, Y, lr = 0.01, r = 1000,  verbose = 0, cst_stopping_condn = 0, view_steps = 0, k = 5, epochs = 8000):
-        self.m = X.shape[0]
-        self.n = X.shape[1]+1
-        self.lr = lr
-        self.r = r
-        X = np.hstack((np.ones((self.m,1)), X)) # X = [1|X]
-        self.theta = np.zeros((self.n,))
-
-        cost = self.J(X,Y,self.theta,self.m)
-        history = [self.theta.copy()]
-        J_values = [cost]
-        moving_sums = []
-        last_k = cost
-        iter = 1
-        grad = 20
-        indices = np.arange(self.m)
-        while (len(moving_sums) <= k or abs(moving_sums[-1]-moving_sums[-k-1]) > self.eps) and iter <= epochs:
-            if view_steps and len(moving_sums) > k:
-                print(iter, cost, abs(moving_sums[-1]-moving_sums[-k-1]))
-            for i in range(0,self.m, r):
-                bidx = indices[i:i+r]
-                X_r = X[bidx,:]
-                Y_r = Y[bidx]
-
-                grad = self.gradiant(X_r, Y_r, self.theta,r)
-                self.theta = self.theta - grad*self.lr
-                
-            
-            cost = self.J(X,Y,self.theta,self.m)
-            last_k+=cost
-            if(len(J_values) >= k):
-                if(len(J_values) > k):
-                    last_k-=J_values[-k-1]
-                moving_sums.append(last_k/k)
-            J_values.append(cost)
-            
-            history.append(self.theta.copy())
-            iter += 1
-        self.iter_ct = iter-1
-        self.train_error = 2*self.J(X, Y,self.theta,self.m)
-        if verbose:
-            print(f"r = {r}, error = {self.train_error}, num_iter = {self.iter_ct}, theta = {self.theta}, error in theta = {np.linalg.norm(self.theta-theta,2)}")
-        return history
 
 r_values = [1,80,8000,800000]
 n_iters = []
@@ -171,7 +113,7 @@ models = []
 histories = []
 for i,r in enumerate(r_values):
     model = sgdregressor()
-    histories.append(np.array(model.fit(X_train, Y_train,lr= 0.001 , r = r, verbose=1,k = 5)))
+    histories.append(np.array(model.fit(X_train, Y_train,lr= 0.001 , r = r, verbose=args.verbose,k = 5)))
     models.append(model)
     n_iters.append(model.iter_ct)
 

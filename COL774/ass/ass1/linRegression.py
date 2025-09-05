@@ -6,6 +6,13 @@ import argparse
 import seaborn as sns
 from matplotlib.animation import FuncAnimation
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-lr", type=float, default=0.1)
+parser.add_argument("-e", type=float, default=1e-6)
+parser.add_argument("--verbose", action="store_true")
+
+args = parser.parse_args()
+
 class regressor():
     def __init__(self):
         self.theta = 0
@@ -109,6 +116,7 @@ def plot(X, Y, model, history = None, hypothesis = 0, cost3d = 0, cost2d = 0, fr
             ax2.legend()
             plt.show()
 
+# load the data
 X, Y = 0, 0
 with open("Q1/linearX.csv","r") as f:
     s = f.read()
@@ -118,19 +126,17 @@ with open("Q1/linearY.csv","r") as f:
     Y = np.array(list(map(float, s[:-1].split('\n'))))
 
 X_train = X.reshape((X.shape[0],1))
-df = pd.DataFrame({'acidity':X, 'density': Y})
 assert(len(X_train.shape) == 2 and len(Y.shape) == 1)
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-lr", type=float, default=0.1)
-parser.add_argument("-e", type=float, default=1e-6)
-parser.add_argument("--verbose", action="store_true")
-
-args = parser.parse_args()
+# visualize the training data
+if(args.verbose):
+    plt.scatter(X.T, Y)
+    plt.show()
 
 model = regressor()
 # save the history (cost, past_theta_values)
 history = np.array(model.fit(X_train,Y,lr = args.lr,verbose = args.verbose))
+print(f"lr = {model.lr}, stopping criterion: l_infinity(grad) < {model.eps}, final parameters = {model.theta}")
 plot(X,Y,model,history,hypothesis=1,cost3d=1,cost2d=1)
 
 for lr in [0.001, 0.025, 0.1]:
@@ -138,5 +144,5 @@ for lr in [0.001, 0.025, 0.1]:
     history = np.array(model.fit(X_train,Y,lr = lr))
     if(args.verbose):
         print(lr, history.shape,model.theta)
-    plot(X,Y,model,history,cost2d=1,freq=1 if lr < 0.01 else 200) # faster updates for small lr's
+    plot(X,Y,model,history,cost2d=1,freq=200) # faster updates for small lr's
     
