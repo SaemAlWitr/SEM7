@@ -54,6 +54,7 @@ class gda:
             covar_inv = np.linalg.inv(self.covar)
             n = (self.mu_1-self.mu_0) @ covar_inv # normal to line
             c = (self.mu_0 @ covar_inv @ self.mu_0 - self.mu_1 @ covar_inv @ self.mu_1)/2 + np.log(self.m1/self.m0)
+            print(n[0],n[1],c)
             if n[1] == 0:
                 return [c for i in x0]
             x1 = [(c - n[0]*x)/n[1] for x in x0]
@@ -65,6 +66,7 @@ class gda:
             b = covar_1_inv @ self.mu_1 - covar_0_inv @ self.mu_0
             c = .5*(self.mu_0 @ covar_0_inv @ self.mu_0 - self.mu_1 @ covar_1_inv @ self.mu_1) +\
                  0.5*(np.log(np.linalg.det(self.covar_0)/np.linalg.det(self.covar_1))) + np.log(self.m1/self.m0)
+            print(A[1,1],b[1]+2*A[0,1], [A[0,0],b[0],c])
             coeffs = lambda x: [A[1,1], b[1]+2*A[0,1]*x, A[0,0]*x**2+b[0]*x+c]
             x1r1 = []
             x1r2 = []

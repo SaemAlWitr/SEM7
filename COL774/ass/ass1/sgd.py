@@ -74,7 +74,7 @@ class sgdregressor():
             history.append(self.theta.copy())
             iter += 1
         self.iter_ct = iter
-        self.train_error = self.J(X, Y,self.theta,self.m)
+        self.train_error = 2*self.J(X, Y,self.theta,self.m)
         print(f"r = {r}, error = {self.train_error}, num_iter = {self.iter_ct}, theta = {self.theta}, error in theta = {np.linalg.norm(self.theta-theta,2)}")
         return history
 

@@ -58,12 +58,11 @@ def plot(X, Y, model, history = None, hypothesis = 0, cost3d = 0, cost2d = 0, fr
     if hypothesis:
         X_plot = np.linspace(np.min(X),np.max(X),2)
         Y_plot = model.theta[0]+model.theta[1]*X_plot
-        plt.figure(figsize=(6,4))
         plt.plot(X_plot, Y_plot,label = 'hypothesis')
         sns.scatterplot(x = X[::2], y = Y[::2],marker='o',color='red', alpha = 0.4,label = 'data-points')
         plt.title("Plot of datapoints and the hypothesis function \n lr = "+str(model.lr))
         plt.xlabel("Acidity")
-        plt.xlabel("Density")
+        plt.ylabel("Density")
         plt.legend()
         plt.show()
     if cost3d or cost2d:
@@ -142,7 +141,6 @@ plot(X,Y,model,history,hypothesis=1,cost3d=1,cost2d=1)
 for lr in [0.001, 0.025, 0.1]:
     model = regressor()
     history = np.array(model.fit(X_train,Y,lr = lr))
-    if(args.verbose):
-        print(lr, history.shape,model.theta)
-    plot(X,Y,model,history,cost2d=1,freq=200) # faster updates for small lr's
+    print(lr, history.shape,model.theta,history[-1][0])
+    plot(X,Y,model,history,cost2d=1,freq=200) 
     
