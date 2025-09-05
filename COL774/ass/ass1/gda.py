@@ -17,7 +17,7 @@ class gda:
         self.covar_1 = 0
         self.mu_0 = 0
         self.mu_1 = 0
-    def eval_normal(self, x, covar, mu):
+    def eval_normal(self, x, covar, mu): # evaluates the multinomial normal N(mu, covar) at x
         det = np.linalg.det(covar)
         p = 1/((2*np.pi)**(self.n/2)*np.sqrt(det))*np.exp(-0.5* (x-mu) @ np.linalg.solve(covar, (x-mu)))
         return p
@@ -52,7 +52,7 @@ class gda:
         assert(self.n == 2)
         if linear:
             covar_inv = np.linalg.inv(self.covar)
-            n = (self.mu_1-self.mu_0) @ covar_inv
+            n = (self.mu_1-self.mu_0) @ covar_inv # normal to line
             c = (self.mu_0 @ covar_inv @ self.mu_0 - self.mu_1 @ covar_inv @ self.mu_1)/2 + np.log(self.m1/self.m0)
             if n[1] == 0:
                 return [c for i in x0]
