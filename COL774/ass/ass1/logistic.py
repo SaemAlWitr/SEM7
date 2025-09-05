@@ -73,7 +73,7 @@ y = [line(p,theta) for p in x]
 
 
 plt.scatter(np.array(X[0].get(X.index[Y[0] == 1])), np.array(X[1].get(X.index[Y[0] == 1])),marker='.',label = "class 1")
-plt.scatter(np.array(X[0].get(X.index[Y[0] == 0])), np.array(X[1].get(X.index[Y[0] == 0])),marker='.',label = "class 0")
+plt.scatter(np.array(X[0].get(X.index[Y[0] == 0])), np.array(X[1].get(X.index[Y[0] == 0])),marker='x',label = "class 0")
 plt.plot(x,y, c = 'r',label = "decision boundary")
 
 plt.legend()
