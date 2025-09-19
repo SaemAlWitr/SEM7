@@ -1,5 +1,0 @@
-pwd
-echo Hello
-history
-history 3
-exit

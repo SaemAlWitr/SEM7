@@ -1,3 +1,0 @@
-MTL458 > echo hello world
-hello world
-MTL458 > exit

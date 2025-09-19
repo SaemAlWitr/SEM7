@@ -1,6 +1,0 @@
-touch a.txt ab.txt b.txt
-ls a*
-ls *.txt
-ls *b*
-rm a.txt ab.txt b.txt
-exit

@@ -1,4 +1,0 @@
-MTL458 > cat file*.txt
-hello world
-foo bar
-MTL458 > exit

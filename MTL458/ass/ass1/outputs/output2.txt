@@ -1,4 +1,0 @@
-MTL458 > ls | grep file
-file1.txt
-file2.txt
-MTL458 > exit

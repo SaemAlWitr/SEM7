@@ -1,5 +1,0 @@
-pwd ; ls
-invalid && ls
-invalid ; ls
-ls && echo OK
-exit

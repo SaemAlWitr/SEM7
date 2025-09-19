@@ -1,9 +1,0 @@
-mkdir dir1
-cd dir1
-pwd
-cd .
-pwd
-cd ..
-pwd
-rmdir dir1
-exit

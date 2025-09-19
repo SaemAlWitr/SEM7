@@ -1,5 +1,0 @@
-echo hola   >   spaced.txt
-cat file* >> spaced.txt
-cat spaced.txt
-rm spaced.txt
-exit
