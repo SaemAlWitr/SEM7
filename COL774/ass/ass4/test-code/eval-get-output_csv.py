@@ -173,7 +173,8 @@ class seq2seqBahdanau(nn.Module):
         h, h_last = self.encoder(X)
         logits, attn_weights = self.decoder(h, h_last, y, T_y, teacher_forcing, mask, starter)
         return logits, attn_weights
-
+    def get_embeddings(self, X):
+        return self.encoder.embeder(X)
 
 def collate_fn(batch, pad_idx=0):
     inp = [item[0].unsqueeze(0) for item in batch]
