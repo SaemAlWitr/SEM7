@@ -1,2 +1,4 @@
 trash/*
 *data*
+*.DS_Store*
+
